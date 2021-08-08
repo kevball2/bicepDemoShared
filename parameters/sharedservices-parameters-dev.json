@@ -1,0 +1,77 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sku": {
+            "value": "Standard"
+        },
+        "tenant": {
+            "value": "4791286b-0707-4782-8dae-89fe4a320b09"
+        },
+        "enabledForDeployment": {
+            "value": false
+        },
+        "enabledForTemplateDeployment": {
+            "value": true
+        },
+        "enabledForDiskEncryption": {
+            "value": false
+        },
+        "enableRbacAuthorization": {
+            "value": true
+        },
+        "enableSoftDelete": {
+            "value": true
+        },
+        "softDeleteRetentionInDays": {
+            "value": 90
+        },
+        "enablePurgeProtection": {
+            "value": true
+        },
+        "networkAcls": {
+            "value": {
+                "defaultAction": "allow",
+                "bypass": "AzureServices",
+                "ipRules": [],
+                "virtualNetworkRules": []
+            }
+        },
+        "userAssignment":{
+            "value": [
+                {
+                    "name": "Kevin Oliver",
+                    "groupObjId": "3ef1c06c-7f96-45d2-a0a6-a73412a44c7a",
+                    "roleDefinitionId": "21090545-7ca7-4776-b22c-e363652d74d2",
+                    "isUser": true
+                },
+                {
+                    "name": "Bicep-DemoSecretUsers",
+                    "groupObjId": "8bc3f44d-c734-4ed0-8966-4362cc7d8b2b",
+                    "roleDefinitionId": "4633458b-17de-408a-b874-0445c86b69e6",
+                    "isUser": true
+                }
+            ]
+            },
+        "resourceGroupName":{
+         "value": "shared"
+        },
+        "keyVaultSecrets":{
+            "value": [
+                {
+                    "name": "secret1",
+                    "value": "KLJ*(SKSD" 
+                },
+                {
+                    "name": "secret2",
+                    "value": "KLJ*(S)(*#KSDKSD"
+                },
+                {
+                    "name": "secret3",
+                    "value": "KLJ*(OI@(SLA*@!*SKSD"
+                }
+            ]
+            }
+    }  
+}
+          

@@ -1,0 +1,86 @@
+parameters:
+- name: environmentObjects
+  type: object
+  default:
+  - environmentName: 'dev'
+    regions: ['northcentralus']
+    dependsOn: ''
+  - environmentName: 'stage'
+    regions: ['northcentralus']
+    dependsOn: 'dev'
+  - environmentName: 'prod'
+    regions: ['northcentralus']
+    dependsOn: 'stage'
+- name: deploymentName
+  type: string
+  default: ''
+- name: variableGroup
+  type: object
+  default: ['API01', 'API02']
+
+stages:
+# Azure Infrastructure Stages for Dev environments from dev branch
+- ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/dev') }}:
+  - ${{ each environmentObject in parameters.environmentObjects }}:
+    - ${{if eq(environmentObject.environmentName, 'dev')}}:
+        - template: stages/bicep-build-stage.yml@sharedTemplates
+          parameters:
+            environmentName: ${{ environmentObject.environmentName }}
+            regions: ${{ environmentObject.regions }}
+            deploymentName: ${{ parameters.deploymentName }}
+        - template: stages/bicep-deploy-stage.yml@sharedTemplates
+          parameters:
+            environmentName: ${{ environmentObject.environmentName }}
+            regions: ${{ environmentObject.regions }}
+            dependsOn: ${{ environmentObject.dependsOn }}
+            deploymentName: ${{ parameters.deploymentName }}
+        - template: stages/keyvault-add_secrets-stage.yml@sharedTemplates
+          parameters:
+            deploymentName: ${{ parameters.deploymentName }}
+            environmentName: ${{ environmentObject.environmentName }}
+            regions: ${{ environmentObject.regions }}
+            variableGroup: ${{ parameters.variableGroup }}
+
+# Azure Infrastructure Stages for Stage environments from main branch
+- ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+  - ${{ each environmentObject in parameters.environmentObjects }}:
+    - ${{if eq(environmentObject.environmentName, 'stage')}}:
+        - template: stages/bicep-build-stage.yml@sharedTemplates
+          parameters:
+            environmentName: ${{ environmentObject.environmentName }}
+            regions: ${{ environmentObject.regions }}
+            deploymentName: ${{ parameters.deploymentName }}
+        - template: stages/bicep-deploy-stage.yml@sharedTemplates
+          parameters:
+            environmentName: ${{ environmentObject.environmentName }}
+            regions: ${{ environmentObject.regions }}
+            dependsOn: ${{ environmentObject.dependsOn }}
+            deploymentName: ${{ parameters.deploymentName }}
+        - template: stages/keyvault-add_secrets-stage.yml@sharedTemplates
+          parameters:
+            deploymentName: ${{ parameters.deploymentName }}
+            environmentName: ${{ environmentObject.environmentName }}
+            regions: ${{ environmentObject.regions }}
+            variableGroup: ${{ parameters.variableGroup }}
+
+# Azure Infrastructure Stages for Prod environments from production branch
+- ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/production') }}:
+  - ${{ each environmentObject in parameters.environmentObjects }}:
+    - ${{if eq(environmentObject.environmentName, 'prod')}}:
+        - template: stages/bicep-build-stage.yml@sharedTemplates
+          parameters:
+            environmentName: ${{ environmentObject.environmentName }}
+            regions: ${{ environmentObject.regions }}
+            deploymentName: ${{ parameters.deploymentName }}
+        - template: stages/bicep-deploy-stage.yml@sharedTemplates
+          parameters:
+            environmentName: ${{ environmentObject.environmentName }}
+            regions: ${{ environmentObject.regions }}
+            dependsOn: ${{ environmentObject.dependsOn }}
+            deploymentName: ${{ parameters.deploymentName }}
+        - template: stages/keyvault-add_secrets-stage.yml@sharedTemplates
+          parameters:
+            deploymentName: ${{ parameters.deploymentName }}
+            environmentName: ${{ environmentObject.environmentName }}
+            regions: ${{ environmentObject.regions }}
+            variableGroup: ${{ parameters.variableGroup }}
