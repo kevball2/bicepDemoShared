@@ -14,8 +14,8 @@ resources:
   repositories:
   - repository: sharedTemplates
     type: github
-    name: kevball2/sharedTemplates
-    endpoint: 'GitHubServiceConnection'
+    name: kevball2/AzDoSharedTemplates
+    endpoint: 'githubServiceConnection'
 
 
 
