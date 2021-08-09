@@ -79,7 +79,7 @@ module resourceGroupModule 'modules/resourcegroup.bicep' = {
 }
 */
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-01-01' = {
-  name: 'rg-${resourceGroupName}-${env}-${locationSettings[location].name}'
+  name: 'rg-${resourceGroupName}-${env}-${location}'
   location: location
   tags: tagValues
   
