@@ -6,7 +6,7 @@
             "value": "Standard"
         },
         "tenant": {
-            "value": "4791286b-0707-4782-8dae-89fe4a320b09"
+            "value": "20a1d97b-1261-47c9-8cec-adba8291275f"
         },
         "enabledForDeployment": {
             "value": false
@@ -49,6 +49,12 @@
                     "name": "Bicep-DemoSecretUsers",
                     "groupObjId": "8bc3f44d-c734-4ed0-8966-4362cc7d8b2b",
                     "roleDefinitionId": "4633458b-17de-408a-b874-0445c86b69e6",
+                    "isUser": false
+                },
+                {
+                    "name": "Technicalpanda-Bicep-Demo",
+                    "groupObjId": "6d904b9e-d19a-43e8-ae85-11cc37fd2abf",
+                    "roleDefinitionId": "b86a8fe4-44ce-4948-aee5-eccb2c155cd7",
                     "isUser": false
                 }
             ]
