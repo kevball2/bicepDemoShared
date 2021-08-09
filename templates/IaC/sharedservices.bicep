@@ -50,6 +50,21 @@ var keyvaultName = 'kv-${resourceGroupName}-${env}-${location}'
 var workspaceName = 'log-${resourceGroupName}-${env}-${location}'
 var applicationInsightsName = 'appi-${resourceGroupName}-${env}-${location}'
 
+var locationSettings = {
+  northcentralus: {
+    name: 'ncenus'
+  }
+  southcentralus: {
+    name: 'scenus'
+  }
+  eastus: {
+    name: 'eastus'
+  }
+  westus: {
+    name: 'westus'
+  }
+}
+
 
 /*
 module resourceGroupModule 'modules/resourcegroup.bicep' = {
@@ -64,7 +79,7 @@ module resourceGroupModule 'modules/resourcegroup.bicep' = {
 }
 */
 resource resourceGroup 'Microsoft.Resources/resourceGroups@2021-01-01' = {
-  name: 'rg-${resourceGroupName}-${env}-${location}'
+  name: 'rg-${resourceGroupName}-${env}-${locationSettings[location].name}'
   location: location
   tags: tagValues
   
@@ -88,7 +103,7 @@ module keyvaultModule 'modules/keyvault.bicep' = {
     enablePurgeProtection: enablePurgeProtection
     enableRbacAuthorization: enableRbacAuthorization
     enableSoftDelete: enableSoftDelete
-    location: location
+    location: locationSettings[location].name
     networkAcls: networkAcls
     sku: sku
     softDeleteRetentionInDays: softDeleteRetentionInDays
@@ -102,11 +117,11 @@ module keyvaultModule 'modules/keyvault.bicep' = {
 
 module appInsightsModule 'modules/appinsights.bicep' = {
   scope: resourceGroup
-  name: 'appi-${resourceGroupName}-${env}-${location}-deployment'
+  name: 'appi-${resourceGroupName}-${env}-${locationSettings[location].name}-deployment'
   params: {
     workspaceName: workspaceName
     appInsightsName: applicationInsightsName
-    location: location
+    location: locationSettings[location].name
     tagValues: tagValues
     keyVaultId: keyvaultModule.outputs.kvId
   }
