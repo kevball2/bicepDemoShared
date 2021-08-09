@@ -40,7 +40,7 @@ param keyVaultSecrets array
 
 // Variables
 var tagValues = {
-  createdBy: 'IaC-ResourceGroups'
+  createdBy: 'BicepDemo-SharedServices'
   environment: env
   deploymentDate: currentDate
 }
