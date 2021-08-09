@@ -49,7 +49,7 @@
                     "name": "Bicep-DemoSecretUsers",
                     "groupObjId": "8bc3f44d-c734-4ed0-8966-4362cc7d8b2b",
                     "roleDefinitionId": "4633458b-17de-408a-b874-0445c86b69e6",
-                    "isUser": true
+                    "isUser": false
                 }
             ]
             },
