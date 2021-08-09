@@ -83,7 +83,7 @@ resource kvSecrets 'Microsoft.KeyVault/vaults/secrets@2021-04-01-preview' = [for
 resource roleassignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = [for user in userAssignment: {
   name: guid(user.roleDefinitionId, resourceGroup().id)
   properties: {
-    principalType: user.isUser ? 'User' : 'Group'
+    principalType: user.principalType
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', user.roleDefinitionId)
     principalId: user.groupObjId
   }

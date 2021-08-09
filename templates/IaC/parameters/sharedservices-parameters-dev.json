@@ -43,19 +43,19 @@
                     "name": "Kevin Oliver",
                     "groupObjId": "3ef1c06c-7f96-45d2-a0a6-a73412a44c7a",
                     "roleDefinitionId": "21090545-7ca7-4776-b22c-e363652d74d2",
-                    "isUser": true
+                    "principalType": "User"
                 },
                 {
                     "name": "Bicep-DemoSecretUsers",
                     "groupObjId": "8bc3f44d-c734-4ed0-8966-4362cc7d8b2b",
                     "roleDefinitionId": "4633458b-17de-408a-b874-0445c86b69e6",
-                    "isUser": false
+                    "principalType": "Group"
                 },
                 {
                     "name": "Technicalpanda-Bicep-Demo",
                     "groupObjId": "6d904b9e-d19a-43e8-ae85-11cc37fd2abf",
                     "roleDefinitionId": "b86a8fe4-44ce-4948-aee5-eccb2c155cd7",
-                    "isUser": false
+                    "principalType": "ServicePrincipal"
                 }
             ]
             },
