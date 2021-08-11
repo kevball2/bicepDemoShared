@@ -21,10 +21,10 @@
             "value": true
         },
         "enableSoftDelete": {
-            "value": false
+            "value": true
         },
         "softDeleteRetentionInDays": {
-            "value": 90
+            "value": 1
         },
         "enablePurgeProtection": {
             "value": true
